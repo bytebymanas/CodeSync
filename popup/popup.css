@@ -1,0 +1,180 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Space+Grotesk:wght@500;700;800&display=swap");
+
+body {
+  margin: 0;
+  width: 336px;
+  padding-bottom: 34px;
+  color: #eaf4ff;
+  font-family: "Space Grotesk", "Segoe UI", system-ui, sans-serif;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(59, 130, 246, 0.34), transparent 28%),
+    radial-gradient(circle at 85% 0%, rgba(96, 165, 250, 0.2), transparent 20%),
+    linear-gradient(165deg, #030617 0%, #07111f 58%, #02050c 100%);
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: linear-gradient(rgba(148, 163, 184, 0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(148, 163, 184, 0.055) 1px, transparent 1px);
+  background-size: 30px 30px;
+  pointer-events: none;
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.85), transparent 96%);
+}
+
+.card {
+  position: relative;
+  margin: 10px;
+  padding: 16px;
+  border: 1px solid rgba(96, 165, 250, 0.18);
+  border-radius: 22px;
+  background: linear-gradient(180deg, rgba(8, 15, 32, 0.84), rgba(4, 9, 20, 0.72));
+  box-shadow: 0 22px 60px rgba(2, 6, 23, 0.56), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(22px);
+}
+
+header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.eyebrow {
+  margin: 0 0 4px;
+  color: #60a5fa;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.28rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+  color: #f8fbff;
+}
+
+h2, p {
+  margin: 0;
+}
+
+.status,
+.latest {
+  margin-top: 16px;
+  padding: 11px;
+  border: 1px solid rgba(96, 165, 250, 0.12);
+  border-radius: 16px;
+  background: rgba(7, 13, 28, 0.68);
+}
+
+.status p:first-child {
+  color: #93c5fd;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.status p + p {
+  margin-top: 6px;
+  color: #cbd5e1;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.82rem;
+}
+
+.actions {
+  display: grid;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+button {
+  border: 1px solid rgba(96, 165, 250, 0.22);
+  border-radius: 13px;
+  padding: 9px 11px;
+  font-weight: 700;
+  cursor: pointer;
+  color: #eff6ff;
+  background: linear-gradient(135deg, rgba(37, 99, 235, 0.95), rgba(14, 165, 233, 0.88));
+  box-shadow: 0 12px 26px rgba(59, 130, 246, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.14);
+  transition: transform 140ms ease, box-shadow 140ms ease, filter 140ms ease;
+}
+
+button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  filter: brightness(1.06);
+  box-shadow: 0 16px 30px rgba(59, 130, 246, 0.24), 0 10px 24px rgba(14, 165, 233, 0.16);
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  filter: grayscale(0.2);
+}
+
+button.secondary {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.96));
+  color: #dbeafe;
+  border-color: rgba(148, 163, 184, 0.2);
+}
+
+button.danger {
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.96), rgba(30, 64, 175, 0.92));
+  color: #bfdbfe;
+}
+
+pre {
+  white-space: pre-wrap;
+  background: linear-gradient(180deg, rgba(2, 6, 23, 0.96), rgba(8, 15, 31, 0.96));
+  border: 1px solid rgba(96, 165, 250, 0.12);
+  border-radius: 14px;
+  padding: 11px;
+  margin-top: 10px;
+  max-height: 190px;
+  overflow: auto;
+  color: #dbeafe;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.8rem;
+}
+
+a {
+  color: #93c5fd;
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+a:hover {
+  color: #dbeafe;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 14px 10px;
+  border-top: 1px solid rgba(96, 165, 250, 0.16);
+  background: linear-gradient(180deg, rgba(3, 7, 18, 0.32), rgba(3, 7, 18, 0.84));
+  color: #7aa6d8;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  pointer-events: none;
+  backdrop-filter: blur(16px);
+}
+
+.footer-dev {
+  color: #8fbffb;
+}
+
+.footer-version {
+  color: #9ad9ff;
+}
+

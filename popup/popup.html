@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeSync</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main class="card">
+      <header>
+        <div>
+          <p class="eyebrow">code sync</p>
+          <h1>CodeSync</h1>
+        </div>
+        <a href="../options/options.html" target="_blank" rel="noreferrer">Settings</a>
+      </header>
+
+      <section class="status">
+        <p id="connection-status">Checking status…</p>
+        <p id="queue-status">Queue: 0</p>
+      </section>
+
+      <section class="actions">
+        <button id="capture-btn">Capture and queue</button>
+        <button id="push-btn">Push queued solutions</button>
+        <button id="clear-btn" class="secondary danger">Clear queue</button>
+        <button id="refresh-btn" class="secondary">Refresh</button>
+      </section>
+
+      <section class="latest">
+        <h2>Latest capture</h2>
+        <pre id="latest-output">Nothing captured yet.</pre>
+      </section>
+
+      <footer class="footer">
+        <span class="footer-dev">DEV - bytebymanas</span>
+        <span class="footer-version">V0.1</span>
+      </footer>
+    </main>
+
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

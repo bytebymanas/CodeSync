@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CodeSync Settings</title>
+    <link rel="stylesheet" href="options.css" />
+  </head>
+  <body>
+    <main class="page">
+      <p class="eyebrow">CodeSync</p>
+      <h1>Settings</h1>
+
+      <form id="settings-form" class="form">
+        <label>
+          GitHub token
+          <input id="githubToken" type="password" autocomplete="off" placeholder="ghp_..." />
+        </label>
+
+        <label>
+          GitHub owner
+          <input id="githubOwner" type="text" placeholder="your-username" />
+        </label>
+
+        <label>
+          Repository name
+          <input id="githubRepo" type="text" placeholder="dsa-solutions" />
+        </label>
+
+        <label>
+          Branch
+          <input id="githubBranch" type="text" placeholder="main" />
+        </label>
+
+        <label class="checkbox">
+          <input id="autoCommit" type="checkbox" />
+          Auto-commit solutions
+        </label>
+
+        <label class="checkbox">
+          <input id="organizeByTopic" type="checkbox" />
+          Organize by topic
+        </label>
+
+        <label class="checkbox">
+          <input id="organizeByDifficulty" type="checkbox" />
+          Organize by difficulty
+        </label>
+
+        <label class="checkbox">
+          <input id="notifyOnCapture" type="checkbox" />
+          Notify on capture
+        </label>
+
+        <label>
+          Naming convention
+          <select id="namingConvention">
+            <option value="kebab-case">kebab-case</option>
+            <option value="snake_case">snake_case</option>
+          </select>
+        </label>
+
+        <div class="actions">
+          <button type="submit">Save settings</button>
+          <button type="button" id="test-connection-btn">Test connection</button>
+          <button type="button" id="reset-btn" class="secondary">Reset</button>
+        </div>
+      </form>
+
+      <p id="status-message"></p>
+    </main>
+
+    <footer class="footer">
+      <span class="footer-dev">DEV - bytebymanas</span>
+      <span class="footer-version">V0.1</span>
+    </footer>
+
+    <script type="module" src="options.js"></script>
+  </body>
+</html>
