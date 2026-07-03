@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/banner.png" alt="CodeSync Banner" width="100%" />
+  <img src="assets/banner.png?v=2" alt="CodeSync Banner" width="100%" />
 </p>
 
 <p align="center">

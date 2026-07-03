@@ -1,80 +1,343 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CodeSync Settings</title>
-    <link rel="stylesheet" href="options.css" />
-  </head>
-  <body>
-    <main class="page">
-      <p class="eyebrow">CodeSync</p>
-      <h1>Settings</h1>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeSync Settings</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
 
-      <form id="settings-form" class="form">
-        <label>
-          GitHub token
-          <input id="githubToken" type="password" autocomplete="off" placeholder="ghp_..." />
-        </label>
+  <div class="layout">
 
-        <label>
-          GitHub owner
-          <input id="githubOwner" type="text" placeholder="your-username" />
-        </label>
-
-        <label>
-          Repository name
-          <input id="githubRepo" type="text" placeholder="dsa-solutions" />
-        </label>
-
-        <label>
-          Branch
-          <input id="githubBranch" type="text" placeholder="main" />
-        </label>
-
-        <label class="checkbox">
-          <input id="autoCommit" type="checkbox" />
-          Auto-commit solutions
-        </label>
-
-        <label class="checkbox">
-          <input id="organizeByTopic" type="checkbox" />
-          Organize by topic
-        </label>
-
-        <label class="checkbox">
-          <input id="organizeByDifficulty" type="checkbox" />
-          Organize by difficulty
-        </label>
-
-        <label class="checkbox">
-          <input id="notifyOnCapture" type="checkbox" />
-          Notify on capture
-        </label>
-
-        <label>
-          Naming convention
-          <select id="namingConvention">
-            <option value="kebab-case">kebab-case</option>
-            <option value="snake_case">snake_case</option>
-          </select>
-        </label>
-
-        <div class="actions">
-          <button type="submit">Save settings</button>
-          <button type="button" id="test-connection-btn">Test connection</button>
-          <button type="button" id="reset-btn" class="secondary">Reset</button>
+    <!-- ══════════════════ SIDEBAR ══════════════════ -->
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <!-- Brand -->
+        <div class="sidebar-brand">
+          <div class="brand-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+            </svg>
+          </div>
+          <span class="brand-name">CodeSync</span>
         </div>
-      </form>
 
-      <p id="status-message"></p>
+        <!-- Navigation -->
+        <nav class="sidebar-nav" aria-label="Page navigation">
+          <button class="nav-item nav-item--active" id="nav-settings" data-page="settings" aria-current="page">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            Settings
+          </button>
+          <button class="nav-item" id="nav-about" data-page="about">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="16" x2="12" y2="12"/>
+              <line x1="12" y1="8" x2="12.01" y2="8"/>
+            </svg>
+            About
+          </button>
+        </nav>
+
+        <!-- Sidebar Footer -->
+        <div class="sidebar-footer">
+          <div class="sidebar-footer-dot"></div>
+          <div>
+            <p class="sf-label">DEV – BYTEBYMANAS</p>
+            <p class="sf-ver">V0.2</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ══════════════════ MAIN CONTENT ══════════════════ -->
+    <main class="content">
+
+      <!-- ─── SETTINGS PAGE ─── -->
+      <section id="page-settings" class="page">
+        <div class="page-header">
+          <h1 class="page-title">CodeSync Settings</h1>
+          <p class="page-sub">Configure your GitHub integration and preferences</p>
+        </div>
+
+        <!-- GitHub Integration Card -->
+        <div class="card" role="group" aria-labelledby="gh-integration-title">
+          <div class="card-header">
+            <div class="card-icon card-icon--blue">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="card-title" id="gh-integration-title">GitHub Integration</h2>
+              <p class="card-sub">Connect your repository to start syncing solutions</p>
+            </div>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label class="field-label" for="githubToken">GitHub Token</label>
+              <div class="field-input-wrap">
+                <input id="githubToken" type="password" autocomplete="off" placeholder="ghp_••••••••••••••••••••" class="field-input" />
+                <button type="button" id="toggle-token-visibility" class="eye-btn" aria-label="Toggle token visibility">
+                  <svg id="eye-icon-show" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
+                  </svg>
+                  <svg id="eye-icon-hide" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden">
+                    <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>
+                  </svg>
+                </button>
+              </div>
+              <p class="field-hint">Your personal access token</p>
+            </div>
+            <div class="field">
+              <label class="field-label" for="githubOwner">GitHub Owner</label>
+              <input id="githubOwner" type="text" placeholder="your-username" class="field-input" />
+              <p class="field-hint">Your GitHub username or organization</p>
+            </div>
+            <div class="field">
+              <label class="field-label" for="githubRepo">Repository Name</label>
+              <input id="githubRepo" type="text" placeholder="dsa-solutions" class="field-input" />
+              <p class="field-hint">Repository to store your solutions</p>
+            </div>
+            <div class="field">
+              <label class="field-label" for="githubBranch">Branch</label>
+              <input id="githubBranch" type="text" placeholder="main" class="field-input" />
+              <p class="field-hint">Default branch (e.g., main)</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Preferences Card -->
+        <div class="card" role="group" aria-labelledby="prefs-title">
+          <div class="card-header">
+            <div class="card-icon card-icon--purple">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/>
+                <path d="M3 18h18"/><circle cx="8" cy="6" r="2" fill="currentColor" stroke="none"/>
+                <circle cx="16" cy="12" r="2" fill="currentColor" stroke="none"/>
+                <circle cx="10" cy="18" r="2" fill="currentColor" stroke="none"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="card-title" id="prefs-title">Preferences</h2>
+              <p class="card-sub">Customize how CodeSync works for you</p>
+            </div>
+          </div>
+
+          <div class="toggle-grid">
+            <div class="toggle-item">
+              <div class="toggle-text">
+                <p class="toggle-label">Auto-commit solutions</p>
+                <p class="toggle-sub">Automatically commit captured solutions</p>
+              </div>
+              <label class="toggle-switch" aria-label="Auto-commit solutions">
+                <input type="checkbox" id="autoCommit" />
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              </label>
+            </div>
+            <div class="toggle-item">
+              <div class="toggle-text">
+                <p class="toggle-label">Organize by difficulty</p>
+                <p class="toggle-sub">Group solutions by difficulty level</p>
+              </div>
+              <label class="toggle-switch" aria-label="Organize by difficulty">
+                <input type="checkbox" id="organizeByDifficulty" />
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              </label>
+            </div>
+            <div class="toggle-item">
+              <div class="toggle-text">
+                <p class="toggle-label">Organize by topic</p>
+                <p class="toggle-sub">Group solutions by problem topics</p>
+              </div>
+              <label class="toggle-switch" aria-label="Organize by topic">
+                <input type="checkbox" id="organizeByTopic" />
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              </label>
+            </div>
+            <div class="toggle-item">
+              <div class="toggle-text">
+                <p class="toggle-label">Notify on capture</p>
+                <p class="toggle-sub">Show notifications when solution is captured</p>
+              </div>
+              <label class="toggle-switch" aria-label="Notify on capture">
+                <input type="checkbox" id="notifyOnCapture" />
+                <span class="toggle-track"><span class="toggle-thumb"></span></span>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Naming Convention Card -->
+        <div class="card" role="group" aria-labelledby="naming-title">
+          <div class="card-header">
+            <div class="card-icon card-icon--teal">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/>
+                <path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/>
+                <path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/>
+                <path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/>
+                <path d="M14 7H8.93A4.998 4.998 0 0 0 4 12"/>
+                <path d="M10 17h5.07A4.998 4.998 0 0 0 20 12"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="card-title" id="naming-title">Naming Convention</h2>
+              <p class="card-sub">Choose your preferred file naming style</p>
+            </div>
+            <div class="naming-select-wrap">
+              <select id="namingConvention" class="naming-select">
+                <option value="kebab-case">kebab-case (two-sum.cpp)</option>
+                <option value="snake_case">snake_case (two_sum.cpp)</option>
+              </select>
+              <p class="naming-hint">Recommended for consistency</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="page-actions">
+          <button type="button" id="test-connection-btn" class="btn btn--outline-blue">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+            Test Connection
+          </button>
+          <button type="button" id="reset-btn" class="btn btn--ghost">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-5"/>
+            </svg>
+            Reset
+          </button>
+          <button type="button" id="save-btn" class="btn btn--blue">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/>
+            </svg>
+            Save Settings
+          </button>
+        </div>
+      </section>
+
+      <!-- ─── ABOUT PAGE ─── -->
+      <section id="page-about" class="page hidden">
+        <div class="page-header">
+          <h1 class="page-title">About CodeSync</h1>
+          <p class="page-sub">Built with passion for developer productivity</p>
+        </div>
+
+        <!-- App Info Card -->
+        <div class="card about-app-card">
+          <div class="about-logo">
+            <div class="about-logo-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+              </svg>
+            </div>
+            <div>
+              <h2 class="about-app-name">CodeSync</h2>
+              <p class="about-app-tagline">Sync. Showcase. Succeed.</p>
+            </div>
+          </div>
+          <div class="about-badges">
+            <span class="badge badge--blue">Manifest V3</span>
+            <span class="badge badge--green">Chrome Extension</span>
+            <span class="badge badge--orange">MIT License</span>
+            <span class="badge badge--teal">v0.2.0</span>
+          </div>
+          <p class="about-app-desc">
+            CodeSync eliminates the manual work of maintaining a solutions repository. It detects accepted submissions from LeetCode and GeeksforGeeks directly in your browser, extracts the code along with metadata (title, difficulty, tags, language), and pushes formatted files to your GitHub repository — all with a single click.
+          </p>
+          <div class="about-features">
+            <div class="about-feature">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              One-click solution capture from LeetCode &amp; GFG
+            </div>
+            <div class="about-feature">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Auto-detects language, difficulty, tags &amp; problem link
+            </div>
+            <div class="about-feature">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Queue-first workflow — nothing is lost offline
+            </div>
+            <div class="about-feature">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+              Smart file organization with metadata headers
+            </div>
+          </div>
+        </div>
+
+        <!-- Developer Card -->
+        <div class="card dev-card">
+          <div class="dev-avatar-wrap">
+            <div class="dev-avatar">
+              <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="dev-name">bytebymanas</h3>
+              <p class="dev-handle">@bytebymanas</p>
+            </div>
+          </div>
+          <p class="dev-bio">
+            A developer passionate about building tools that make coding workflows seamless and productive. CodeSync was born from the frustration of manually copying solutions to GitHub after every LeetCode session — so why not automate it?
+          </p>
+          <div class="dev-links">
+            <a href="https://github.com/bytebymanas" target="_blank" rel="noreferrer" class="dev-link dev-link--github" id="github-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+              </svg>
+              github.com/bytebymanas
+            </a>
+            <a href="https://bytebymanas.me" target="_blank" rel="noreferrer" class="dev-link dev-link--portfolio" id="portfolio-link">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="2" y1="12" x2="22" y2="12"/>
+                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+              bytebymanas.me
+            </a>
+          </div>
+        </div>
+
+        <!-- Tech Stack Card -->
+        <div class="card">
+          <h3 class="card-title" style="margin-bottom:12px;">Built With</h3>
+          <div class="tech-grid">
+            <div class="tech-item">
+              <span class="tech-dot" style="background:#4B8EF2"></span>
+              <span>Chrome Extension API (MV3)</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-dot" style="background:#F7DF1E"></span>
+              <span>Vanilla JavaScript (ES Modules)</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-dot" style="background:#6E40C9"></span>
+              <span>GitHub Contents API</span>
+            </div>
+            <div class="tech-item">
+              <span class="tech-dot" style="background:#0EA5E9"></span>
+              <span>Monaco &amp; Ace Editor Bridges</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </main>
+  </div>
 
-    <footer class="footer">
-      <span class="footer-dev">DEV - bytebymanas</span>
-      <span class="footer-version">V0.1</span>
-    </footer>
+  <!-- ══════════════════ TOAST CONTAINER ══════════════════ -->
+  <div id="toast-container" class="toasts" aria-live="polite" aria-atomic="false"></div>
 
-    <script type="module" src="options.js"></script>
-  </body>
+  <script type="module" src="options.js"></script>
+</body>
 </html>

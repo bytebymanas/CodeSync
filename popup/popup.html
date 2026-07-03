@@ -1,44 +1,188 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CodeSync</title>
-    <link rel="stylesheet" href="popup.css" />
-  </head>
-  <body>
-    <main class="card">
-      <header>
-        <div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CodeSync</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+
+  <!-- ══════════════════ MAIN VIEW ══════════════════ -->
+  <div class="popup" id="main-view">
+
+    <!-- Header -->
+    <header class="hd">
+      <div class="hd-brand">
+        <div class="brand-icon">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </div>
+        <div class="hd-text">
           <p class="eyebrow">code sync</p>
           <h1>CodeSync</h1>
         </div>
-        <a href="../options/options.html" target="_blank" rel="noreferrer">Settings</a>
-      </header>
+      </div>
+      <div class="hd-right">
+        <p class="tagline">Sync. Showcase. Succeed.</p>
+        <a id="settings-link" href="../options/options.html" target="_blank" rel="noreferrer" class="icon-btn" title="Open Settings" aria-label="Open Settings">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+        </a>
+      </div>
+    </header>
 
-      <section class="status">
-        <p id="connection-status">Checking status…</p>
-        <p id="queue-status">Queue: 0</p>
-      </section>
+    <!-- Status Dashboard -->
+    <div class="status-grid">
+      <div class="status-cell">
+        <p class="status-lbl">GITHUB STATUS</p>
+        <div class="status-row">
+          <span class="dot dot--wait" id="gh-dot"></span>
+          <span class="status-val" id="gh-status-text">Checking…</span>
+        </div>
+        <p class="status-hint" id="gh-owner-text"></p>
+      </div>
+      <div class="status-sep"></div>
+      <div class="status-cell">
+        <p class="status-lbl">QUEUE STATUS</p>
+        <div class="status-row">
+          <svg class="q-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4">
+            <line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>
+          </svg>
+          <span class="status-val status-val--blue" id="queue-count-text">0 pending</span>
+        </div>
+        <p class="status-hint" id="queue-hint-text">Ready to push</p>
+      </div>
+    </div>
 
-      <section class="actions">
-        <button id="capture-btn">Capture and queue</button>
-        <button id="push-btn">Push queued solutions</button>
-        <button id="clear-btn" class="secondary danger">Clear queue</button>
-        <button id="refresh-btn" class="secondary">Refresh</button>
-      </section>
+    <!-- Action Buttons -->
+    <div class="actions">
+      <button id="capture-btn" class="btn btn--blue">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+          <polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/>
+        </svg>
+        <span>
+          <span class="btn-main">Capture &amp; Queue</span>
+          <span class="btn-hint">Capture solution from this page</span>
+        </span>
+      </button>
 
-      <section class="latest">
-        <h2>Latest capture</h2>
-        <pre id="latest-output">Nothing captured yet.</pre>
-      </section>
+      <button id="push-btn" class="btn btn--green" disabled>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="23 4 23 10 17 10"/>
+          <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+        </svg>
+        <span>
+          <span class="btn-main">Push Queue to GitHub</span>
+          <span class="btn-hint">Push all queued solutions</span>
+        </span>
+      </button>
 
-      <footer class="footer">
-        <span class="footer-dev">DEV - bytebymanas</span>
-        <span class="footer-version">V0.1</span>
-      </footer>
-    </main>
+      <div class="btn-pair">
+        <button id="clear-btn" class="btn btn--danger-sm" disabled>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/>
+          </svg>
+          Clear Queue
+        </button>
+        <button id="refresh-btn" class="btn btn--ghost">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"/>
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+          </svg>
+          Refresh
+        </button>
+      </div>
+    </div>
 
-    <script type="module" src="popup.js"></script>
-  </body>
+    <!-- Latest Capture -->
+    <section class="latest">
+      <div class="latest-hd">
+        <h2 class="latest-title">Latest Capture</h2>
+        <span id="capture-ts" class="capture-ts"></span>
+      </div>
+      <div id="latest-output" class="code-preview">
+        <p class="no-data">Nothing captured yet.</p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <span class="footer-brand">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8">
+          <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+        </svg>
+        DEV – BYTEBYMANAS
+      </span>
+      <span class="footer-ver">V0.2</span>
+    </footer>
+  </div>
+
+  <!-- ══════════════════ LANGUAGE RESOLVER MODAL ══════════════════ -->
+  <div id="lang-modal" class="modal-wrap hidden" role="dialog" aria-modal="true" aria-labelledby="lang-modal-title">
+    <div class="modal-box">
+      <div class="modal-icon-wrap modal-icon--warn">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+          <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+        </svg>
+      </div>
+      <h3 class="modal-title" id="lang-modal-title">Language Not Detected</h3>
+      <p class="modal-body">Couldn't auto-detect the language for <strong id="modal-problem-name">"this problem"</strong>. Select the file extension to push:</p>
+      <select id="lang-select" class="lang-select">
+        <option value="cpp">C++ (.cpp)</option>
+        <option value="java">Java (.java)</option>
+        <option value="py">Python / Python3 (.py)</option>
+        <option value="js">JavaScript (.js)</option>
+        <option value="ts">TypeScript (.ts)</option>
+        <option value="go">Go (.go)</option>
+        <option value="rs">Rust (.rs)</option>
+        <option value="cs">C# (.cs)</option>
+        <option value="c">C (.c)</option>
+        <option value="kt">Kotlin (.kt)</option>
+        <option value="swift">Swift (.swift)</option>
+        <option value="php">PHP (.php)</option>
+        <option value="rb">Ruby (.rb)</option>
+      </select>
+      <div class="modal-actions">
+        <button id="lang-cancel-btn" class="btn btn--ghost modal-btn">Cancel</button>
+        <button id="lang-confirm-btn" class="btn btn--blue modal-btn">Push with this extension</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════ SYNC PROGRESS VIEW ══════════════════ -->
+  <div id="sync-view" class="sync-view hidden" aria-live="polite">
+    <div class="sync-hd">
+      <div class="sync-spin-wrap" id="sync-spin-wrap">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="23 4 23 10 17 10"/>
+          <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/>
+        </svg>
+      </div>
+      <div>
+        <p class="sync-title" id="sync-title">Pushing to GitHub…</p>
+        <p class="sync-sub" id="sync-sub">Preparing…</p>
+      </div>
+    </div>
+    <div class="sync-bar-wrap">
+      <div class="sync-bar-fill" id="sync-bar-fill"></div>
+      <span class="sync-pct" id="sync-pct">0%</span>
+    </div>
+    <div id="sync-file-list" class="sync-file-list"></div>
+    <div id="sync-result" class="sync-result hidden"></div>
+  </div>
+
+  <!-- ══════════════════ TOAST CONTAINER ══════════════════ -->
+  <div id="toast-container" class="toasts" aria-live="polite" aria-atomic="false"></div>
+
+  <script type="module" src="popup.js"></script>
+</body>
 </html>

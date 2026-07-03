@@ -98,6 +98,7 @@ async function processQueue(options = {}) {
       processed: 0,
       pushed: 0,
       remaining: 0,
+      pendingLanguage: 0,
       mode: "idle"
     };
   }
@@ -105,9 +106,17 @@ async function processQueue(options = {}) {
   const remaining = [];
   let pushed = 0;
   let lastResult = null;
+  let pendingLanguage = 0;
 
   for (const item of queue) {
     try {
+      // Skip items waiting on user to resolve language (unless this call is for a specific item)
+      if (item.languagePending && options.resolveItemId !== item.id) {
+        remaining.push(item);
+        pendingLanguage++;
+        continue;
+      }
+
       await setStorage({
         lastCapture: item.solution
       });
@@ -175,6 +184,7 @@ async function processQueue(options = {}) {
     processed: queue.length,
     pushed,
     remaining: remaining.length,
+    pendingLanguage,
     mode: hasGitHubConfig(settings) && settings.autoCommit ? "auto-sync" : "queue-only"
   };
 }
@@ -252,6 +262,24 @@ chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
 
       if (message?.type === "CLEAR_QUEUE") {
         sendResponse(await clearQueue());
+        return;
+      }
+
+      if (message?.type === "RESOLVE_LANGUAGE") {
+        // Update a queued item's language and mark it as resolved, then push it
+        const { itemId, extension } = message;
+        const queue = await getQueue();
+        const updated = queue.map(item => {
+          if (item.id !== itemId) return item;
+          return {
+            ...item,
+            languagePending: false,
+            solution: { ...item.solution, language: extension }
+          };
+        });
+        await saveQueue(updated);
+        const result = await processQueue({ forcePush: true, resolveItemId: itemId });
+        sendResponse({ ok: true, ...result });
         return;
       }
 
